@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>山河的浩瀚宇宙的浪漫</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #ffb6c1;
+            font-family: "微软雅黑", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .center-box {
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 0 10px #ff477e, 0 0 20px #ff6b9d;
+            z-index: 99;
+            padding: 0 15px;
+            animation: beat 1.5s infinite alternate;
+        }
+
+        .title {
+            font-size: clamp(32px,8vw,52px);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .love-text {
+            font-size: clamp(16px,4vw,22px);
+            line-height: 2;
+        }
+
+        @keyframes beat {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        .petal {
+            position: absolute;
+            background: #ff8fab;
+            border-radius: 50% 0 50% 0;
+            opacity: 0.75;
+            animation: fall linear infinite;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff477e;
+            font-size: clamp(18px,5vw,26px);
+            animation: float linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.85; }
+            90% { opacity: 0.75; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="center-box">
+        <div class="title">王怡青 我爱你 ❤</div>
+        <div class="love-text">
+            看着我的眼睛<br>
+            听我说我爱你<br>
+            全世界的星星都不及你<br>
+            入目无别人 四下皆是你<br>
+            别人再好与我无关<br>
+            你再普通我都喜欢<br>
+            承蒙你出现 够我喜欢好多年<br>
+            往后余生 万般皆你
+        </div>
+    </div>
+
+    <!-- 这里已经改成 m4a 支持 -->
+    <audio id="bgm" loop preload="auto">
+        <source src="bgm.m4a" type="audio/mp4">
+    </audio>
+
+    <script>
+        function createPetal() {
+            const p = document.createElement("div");
+            p.className = "petal";
+            const size = Math.random() * 14 + 6;
+            p.style.width = size + "px";
+            p.style.height = size + "px";
+            p.style.left = Math.random() * 100 + "vw";
+            p.style.animationDuration = Math.random() * 7 + 4 + "s";
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 11000);
+        }
+
+        function createHeart() {
+            const h = document.createElement("div");
+            h.className = "heart";
+            h.innerHTML = "❤";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.top = Math.random() * 100 + "vh";
+            h.style.animationDuration = Math.random() * 9 + 5 + "s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 14000);
+        }
+
+        setInterval(createPetal, 150);
+        setInterval(createHeart, 250);
+
+        const audio = document.getElementById('bgm');
+        document.body.addEventListener('click', () => {
+            audio.play().catch(e => console.log("播放失败：", e));
+        }, { once: true });
+    </script>
+</body>
+</html>
